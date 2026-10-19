@@ -1,0 +1,11 @@
+# إعدادات Claude المحلية
+.claude/
+
+# ملفات SQLite المؤقتة
+data/*.db-wal
+data/*.db-shm
+
+# ملفات النظام
+Thumbs.db
+desktop.ini
+node_modules/

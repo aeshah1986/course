@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مهارات المستقبل — الدورات</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <h1>🎓 مهارات المستقبل</h1>
+      <p>تصفّح دوراتنا التدريبية</p>
+    </div>
+    <div class="header-actions">
+      <span class="badge admin-badge" id="admin-badge" hidden>وضع الإدارة</span>
+      <button class="btn" id="add-course" hidden>➕ دورة جديدة</button>
+      <button class="btn" id="restore" hidden>♻️ استعادة الأصلية</button>
+      <button class="btn" id="logout" hidden>🚪 خروج</button>
+      <button class="btn" id="admin-toggle">🔐 دخول الإدارة</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar" aria-label="البحث والتصفية">
+      <input type="search" id="search" class="search" placeholder="🔍 ابحث باسم الدورة أو المدرب أو الوصف...">
+      <select id="filter-field" aria-label="تصفية حسب المجال"></select>
+      <select id="filter-category" aria-label="تصفية حسب التصنيف"></select>
+      <button class="btn" id="clear-filters" hidden>مسح الفلاتر</button>
+    </section>
+
+    <p class="result-count" id="result-count"></p>
+
+    <section class="courses" id="courses" aria-live="polite"></section>
+    <p class="empty" id="empty" hidden></p>
+  </main>
+
+  <!-- نافذة تفاصيل الدورة -->
+  <dialog id="details-dialog">
+    <div class="dialog-body" id="details-body"></div>
+    <div class="actions dialog-footer">
+      <button type="button" class="btn primary" id="close-details">إغلاق</button>
+    </div>
+  </dialog>
+
+  <!-- نافذة إضافة/تعديل دورة (للإدارة فقط) -->
+  <dialog id="course-dialog">
+    <form id="course-form">
+      <h3 id="course-dialog-title">دورة جديدة</h3>
+      <label>اسم الدورة *
+        <input type="text" name="name" required maxlength="120">
+      </label>
+      <div class="row">
+        <label>المجال *
+          <input type="text" name="field" required maxlength="60" list="field-list" placeholder="مثال: البرمجة">
+        </label>
+        <label>التصنيف
+          <input type="text" name="category" maxlength="60" list="category-list" placeholder="مثال: تقني">
+        </label>
+      </div>
+      <div class="row">
+        <label>المدرب
+          <input type="text" name="trainer" maxlength="80">
+        </label>
+        <label>المدة
+          <input type="text" name="duration" maxlength="40" placeholder="مثال: 30 ساعة">
+        </label>
+      </div>
+      <label>السعر *
+        <input type="number" name="price" required min="0" step="any">
+      </label>
+      <label>معلومات عن الدورة
+        <textarea name="description" rows="4" maxlength="1000"></textarea>
+      </label>
+      <div class="actions">
+        <button type="button" class="btn" id="cancel-course">إلغاء</button>
+        <button type="submit" class="btn primary">حفظ</button>
+      </div>
+    </form>
+  </dialog>
+  <datalist id="field-list"></datalist>
+  <datalist id="category-list"></datalist>
+
+  <!-- نافذة دخول الإدارة -->
+  <dialog id="login-dialog">
+    <form id="login-form">
+      <h3>دخول الإدارة</h3>
+      <label>كلمة المرور
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <p class="error" id="login-error" hidden>كلمة المرور غير صحيحة.</p>
+      <div class="actions">
+        <button type="button" class="btn" id="cancel-login">إلغاء</button>
+        <button type="submit" class="btn primary">دخول</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="logic.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
